@@ -20,6 +20,6 @@ app.get('/*', (req, res) => {
   res.sendFile('index.html', {root: 'dist/your-angular-app/'});
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, () => { 
   console.log(`Server is running on port ${PORT}`);
 });
