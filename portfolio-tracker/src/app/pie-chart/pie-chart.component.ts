@@ -13,14 +13,18 @@ export class PieChartComponent implements OnInit, OnChanges {
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {};
 
-
   constructor() {
     HC_exporting(Highcharts);
   }
 
   ngOnInit(): void {
-    this.initChart();
+    const storedData = localStorage.getItem('cryptoData');
 
+    if (storedData) {
+      this.portfolio = JSON.parse(storedData);
+    }
+
+    this.initChart();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -30,7 +34,6 @@ export class PieChartComponent implements OnInit, OnChanges {
   }
 
   initChart(): void {
-    console.log(this.portfolio)
     const data = this.portfolio.map((crypto) => ({
       name: crypto.symbol,
       y: crypto.amount * crypto.usdPrice,
@@ -54,5 +57,11 @@ export class PieChartComponent implements OnInit, OnChanges {
         enabled: true,
       },
     };
+  }
+
+  clearData(): void {
+    localStorage.removeItem('cryptoData');
+    this.portfolio = [];
+    this.initChart();
   }
 }
