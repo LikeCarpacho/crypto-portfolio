@@ -12,7 +12,7 @@
       <input id="amount" type="number" [(ngModel)]="amountOwned" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:border-blue-600 text-sm" />
     </div>
     <div class="w-full">
-      <button onclick="addCrypto()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded md:px-6 md:py-3 lg:px-8 lg:py-4">
+      <button (click)="addCrypto()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded md:px-6 md:py-3 lg:px-8 lg:py-4">
         Click me
       </button>
       
