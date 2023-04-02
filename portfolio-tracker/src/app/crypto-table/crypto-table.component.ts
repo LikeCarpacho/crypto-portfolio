@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+
 
 @Component({
   selector: 'app-crypto-table',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./crypto-table.component.scss']
 })
 export class CryptoTableComponent {
+  
+  @Input() portfolio: { symbol: string; amount: number; usdPrice: number;}[] = [];
 
 }

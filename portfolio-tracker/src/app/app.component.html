@@ -9,9 +9,11 @@
 
 <div class="container mx-auto">
   <app-add-crypto (cryptoAdded)="addToPortfolio($event)"></app-add-crypto>
+  <p style="text-align: center;">Your portfolio is worth ${{portfolioValue}}.</p>
   <app-pie-chart [portfolio]="portfolio"></app-pie-chart>
+  <button (click)="clearData()" class="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">Clear Data</button>
+  <app-crypto-table [portfolio]="portfolio"></app-crypto-table>
   <h1>TODO</h1>
-  <p>Add a table breakdown below</p>
   <p>Either find a better free API or finish setting up mongodb</p>
 </div>
 

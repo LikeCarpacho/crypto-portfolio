@@ -44,7 +44,7 @@ export class PieChartComponent implements OnInit, OnChanges {
         type: 'pie',
       },
       title: {
-        text: 'Portfolio',
+        text: '',
       },
       series: [
         {

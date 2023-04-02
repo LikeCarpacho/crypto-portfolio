@@ -7,10 +7,17 @@ import { Component } from '@angular/core';
 export class AppComponent {
   portfolio: { symbol: string; amount: number; usdPrice: number;}[] = [];
 
+  portfolioValue: number = 0;
+
   ngOnInit(){
     const storedData = localStorage.getItem('cryptoData');
     if (storedData) {
       this.portfolio = JSON.parse(storedData);
+    }
+
+    for(let i = 0;i<this.portfolio.length;i++){
+      console.log(this.portfolio[i])
+      this.portfolioValue += this.portfolio[i].amount * this.portfolio[i].usdPrice
     }
   }
 
@@ -48,5 +55,8 @@ export class AppComponent {
     this.portfolio = [...this.portfolio];
   }
   
-  
+  clearData(): void {
+    localStorage.removeItem('cryptoData');
+    this.portfolio = [...[]];
+  }
 }

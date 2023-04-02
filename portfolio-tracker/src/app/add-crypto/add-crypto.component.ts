@@ -38,7 +38,7 @@ export class AddCryptoComponent implements OnInit {
 
   addCrypto(): void {
     this.cryptoAdded.emit({
-      symbol: this.selectedCrypto.symbol,
+      symbol: String(this.selectedCrypto.symbol).toUpperCase(),
       amount: this.amountOwned,
       usdPrice: this.selectedCrypto.current_price
     });
