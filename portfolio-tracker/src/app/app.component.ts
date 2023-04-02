@@ -17,8 +17,6 @@ export class AppComponent {
   
 
   addToPortfolio(crypto: { symbol: string; amount: number; usdPrice: number; }): void {
-
-    
     const existingCrypto = this.portfolio.find((c) => c.symbol === crypto.symbol);
     
     if (existingCrypto) {
@@ -27,21 +25,28 @@ export class AppComponent {
       this.portfolio.push(crypto);
     }
     const storedData = localStorage.getItem('cryptoData');
-
-    let cryptoData = JSON.parse(storedData!)
-
+  
+    let cryptoData;
+  
+    if (storedData) {
+      cryptoData = JSON.parse(storedData);
+    } else {
+      cryptoData = []; // Initialize cryptoData as an empty array when there's no stored data
+    }
+  
     const existingCryptoIndex = cryptoData.findIndex((c:any) => c.symbol ===  crypto.symbol);
-
+  
     if (existingCryptoIndex !== -1) {
       cryptoData[existingCryptoIndex] = crypto;
     } else {
       cryptoData.push(crypto);
     }
-
+  
     localStorage.setItem('cryptoData', JSON.stringify(cryptoData));
-
+  
     // Update the portfolio array with a new reference to trigger ngOnChanges
     this.portfolio = [...this.portfolio];
   }
+  
   
 }
