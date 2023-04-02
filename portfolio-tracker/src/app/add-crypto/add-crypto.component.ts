@@ -30,46 +30,21 @@ export class AddCryptoComponent implements OnInit {
     this.http
       .get('https://api.coingecko.com/api/v3/coins/markets', { params })
       .subscribe((data: any) => {
-        console.log(data);
         this.top100Cryptos = data.map((coin: any) => coin);
           // Check if there's a saved crypto and amount owned in localStorage
       });
 
   }
 
-  addCrypto(): void 
-  {
+  addCrypto(): void {
     this.cryptoAdded.emit({
       symbol: this.selectedCrypto.symbol,
       amount: this.amountOwned,
       usdPrice: this.selectedCrypto.current_price
     });
-   
-    
-    const storedData = localStorage.getItem('cryptoData');
-    let cryptoData = [];
-
-    if (storedData) {
-      cryptoData = JSON.parse(storedData);
-    }
-
-    const newCrypto = {
-      symbol: this.selectedCrypto.symbol,
-      amount: this.amountOwned,
-      usdPrice: this.selectedCrypto.current_price
-    };
-
-    const existingCryptoIndex = cryptoData.findIndex((crypto:any) => crypto.symbol === newCrypto.symbol);
-
-    if (existingCryptoIndex !== -1) {
-      cryptoData[existingCryptoIndex] = newCrypto;
-    } else {
-      cryptoData.push(newCrypto);
-    }
-
-    localStorage.setItem('cryptoData', JSON.stringify(cryptoData));
-
+  
     this.selectedCrypto = null;
     this.amountOwned = 0;
-    }
+  }
+  
 }
