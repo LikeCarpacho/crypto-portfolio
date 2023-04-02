@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import HC_exporting from 'highcharts/modules/exporting';
 
 @Component({
   selector: 'app-pie-chart',
@@ -14,7 +13,6 @@ export class PieChartComponent implements OnInit, OnChanges {
   chartOptions: Highcharts.Options = {};
 
   constructor() {
-    HC_exporting(Highcharts);
   }
 
   ngOnInit(): void {

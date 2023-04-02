@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 
 
 @Component({
@@ -9,5 +9,11 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 export class CryptoTableComponent {
   
   @Input() portfolio: { symbol: string; amount: number; usdPrice: number;}[] = [];
-
+  
+  @Output() entryDeleted = new EventEmitter<string>();
+  
+  
+  deleteEntry(symbol: string) {
+    this.entryDeleted.emit(symbol);
+  }
 }
