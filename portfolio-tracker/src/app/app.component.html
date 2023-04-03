@@ -6,16 +6,17 @@
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<div class="container mx-auto">
-  
-
-  
-
-  <app-nav-bar style="z-index: 5;"
+<div>
+<app-nav-bar style="z-index: 5; position: fixed;"
   (showAddCryptoChanged)="onShowAddCryptoChanged($event)"
   (clearDataEvent)="clearData()
   "></app-nav-bar>
+  <div style="padding-left: 0px;">
+    <p style="padding-top: 10px; padding-left: 50px; width: 300px; font-size: small;" *ngIf="portfolio.length < 1">Want to get started? Add a new holding by clicking the menu</p>
+  </div>  
+</div>
+<div class="container mx-auto" style="padding-top: 50px; ">
+
   <app-add-crypto *ngIf="showAddCrypto" (cryptoAdded)="addToPortfolio($event)" (showModal)="closeModal()"></app-add-crypto>
 
   <div *ngIf="portfolio.length > 0">

@@ -12,6 +12,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { UpdateHoldingComponent } from './update-holding/update-holding.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CustomDropdownComponent } from './custom-dropdown/custom-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     PieChartComponent,
     CryptoTableComponent,
     NavBarComponent,
-    UpdateHoldingComponent
+    UpdateHoldingComponent,
+    CustomDropdownComponent
   ],
   imports: [
     BrowserModule,
