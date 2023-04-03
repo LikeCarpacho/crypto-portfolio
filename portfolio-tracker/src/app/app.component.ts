@@ -16,6 +16,8 @@ export class AppComponent {
 
 
   showAddCrypto = false;
+
+  cryptosList: any = [];
   
   constructor(private http: HttpClient) {} // Inject HttpClient
 
@@ -34,7 +36,7 @@ export class AppComponent {
 
   updateCryptoPrices(): void {
     this.fetchTop100Cryptos().subscribe((data: any) => {
-      console.log(data)
+      this.cryptosList = data;
       data.forEach((coin: any) => {
         const existingCryptoIndex = this.portfolio.findIndex((c) => c.symbol.toLowerCase() === coin.symbol.toLowerCase());
         if (existingCryptoIndex !== -1) {

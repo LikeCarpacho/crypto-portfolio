@@ -11,21 +11,24 @@
   (showAddCryptoChanged)="onShowAddCryptoChanged($event)"
   (clearDataEvent)="clearData()
   "></app-nav-bar>
-  <div style="padding-left: 0px;">
-    <p style="padding-top: 10px; padding-left: 50px; width: 300px; font-size: small;" *ngIf="portfolio.length < 1">Want to get started? Add a new holding by clicking the menu</p>
-  </div>  
+  <p style="text-align:right; color: whitesmoke; padding-right: 5px; padding-top: 5px;" *ngIf="portfolio.length < 1">Want to get started? Add a new holding by clicking the menu</p>
+  
 </div>
-<div class="container mx-auto" style="padding-top: 50px; ">
 
+<div class="container mx-auto" style="padding-top: 50px; ">
+  <div style="padding-left: 0px;">
+  </div>  
   <app-add-crypto *ngIf="showAddCrypto" (cryptoAdded)="addToPortfolio($event)" (showModal)="closeModal()"></app-add-crypto>
 
-  <div *ngIf="portfolio.length > 0">
+  <div *ngIf="portfolio.length > 0" style="margin-bottom: 10px;">
     <p style="text-align: center; color: lightgray;">Your portfolio is worth {{portfolioValue | currency:"USD"}}.</p>
     <app-pie-chart [portfolio]="portfolio" [totalVal]="portfolioValue"></app-pie-chart>
     <!-- <button (click)="clearData()" class="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">Clear Data</button> -->
     <app-crypto-table [portfolio]="portfolio" (entryDeleted)="deleteEntry($event)" (entryUpdated)="updateHolding($event)"></app-crypto-table>
-    <p style="text-align: right; color: whitesmoke;">{{lastUpdated}}</p>
   </div>
+  <app-crypto-converter [top100Cryptos]="cryptosList"></app-crypto-converter>
+  <p style="text-align: right; color: whitesmoke;">{{lastUpdated}}</p>
+
  
   <!-- <h1>TODO</h1>
   <p>Either find a better free API or finish setting up mongodb</p> -->

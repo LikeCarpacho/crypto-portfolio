@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .crypto-select {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  select {
+    margin-bottom: 0.5rem;
+  }
+  
