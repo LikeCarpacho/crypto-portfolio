@@ -18,6 +18,8 @@ export class AppComponent {
   showAddCrypto = false;
 
   cryptosList: any = [];
+
+  showConverter: boolean = false;
   
   constructor(private http: HttpClient) {} // Inject HttpClient
 
@@ -56,6 +58,9 @@ export class AppComponent {
   }
   onShowAddCryptoChanged(value: boolean): void {
     this.showAddCrypto = value;
+  }
+  onShowConverterChanged(value: boolean): void {
+    this.showConverter = value;
   }
   formatCurrentTime() {
     const currentTime = new Date();

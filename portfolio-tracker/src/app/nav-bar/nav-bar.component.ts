@@ -10,10 +10,19 @@ export class NavBarComponent {
 
   @Output() showAddCryptoChanged = new EventEmitter<boolean>();
 
+  @Output() showConverterChanged = new EventEmitter<boolean>();
+  
   @Output() clearDataEvent = new EventEmitter<void>();
+
+  converterVisible = false;
 
   // Call this function when you want to emit the event
   updateShowAddCrypto(value: boolean): void {
     this.showAddCryptoChanged.emit(value);
+  }
+  updateShowConverter(value: boolean): void {
+    this.converterVisible = !this.converterVisible;
+    this.showConverterChanged.emit(this.converterVisible);
+
   }
 }
