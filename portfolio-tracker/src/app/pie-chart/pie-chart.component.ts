@@ -40,8 +40,9 @@ export class PieChartComponent implements OnInit, OnChanges {
   initChart(): void {
     const data = this.portfolio.map((crypto) => ({
       name: crypto.symbol,
-      y: crypto.amount * crypto.usdPrice,
-      pect: (crypto.amount * crypto.usdPrice / this.totalVal) * 100
+      y: (crypto.amount * crypto.usdPrice),
+      pect: (crypto.amount * crypto.usdPrice / this.totalVal) * 100,
+      yString: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(crypto.amount * crypto.usdPrice)
     }));
 
     this.chartOptions = {
@@ -62,7 +63,7 @@ export class PieChartComponent implements OnInit, OnChanges {
         
       ],
       tooltip:{
-        pointFormat: '<b>{point.name}</b>: {point.y} ({point.pect:.1f}%)',
+        pointFormat: '{point.yString} <b>({point.pect:.1f}%)</b>',
       }
 
     };
