@@ -8,7 +8,11 @@ import { AfterContentInit, AfterViewInit, Component, EventEmitter, Input, OnInit
 export class CustomDropdownComponent implements OnInit {
   @Input() items: any[] = [];
   @Output() selectedItem = new EventEmitter<any>();
+
+  filteredItems: any[] = [];
+
   isOpen = false;
+
   selected: { symbol: string; name: string; } = {
     symbol: '',
     name: '',
@@ -23,11 +27,23 @@ export class CustomDropdownComponent implements OnInit {
       this.selected.symbol = "$ABC"
     }
   }
+  filterItems(searchText: string) {
+    console.log(searchText)
+    if(searchText !== ""){
+      this.filteredItems = this.items.filter(item =>
+        item.name.toLowerCase().includes(searchText.toLowerCase()) || item.symbol.toLowerCase().includes(searchText.toLowerCase())
+      );
+    } else {
+      this.filteredItems = [...this.items];
+    }
+  }
 
 
 
   toggleDropdown() {
     this.isOpen = !this.isOpen;
+    this.filteredItems = [...this.items];
+
   }
 
   selectItem(item: any) {

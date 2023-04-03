@@ -8,10 +8,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class AddCryptoComponent implements OnInit {
 
+
   @Output() cryptoAdded = new EventEmitter<{ symbol: string; amount: number; usdPrice:number; }>();
 
   @Output() showModal = new EventEmitter<void>;
-
 
   top100Cryptos: any[] = [];
   selectedCrypto: any;
@@ -23,7 +23,9 @@ export class AddCryptoComponent implements OnInit {
   ngOnInit(): void {
     this.fetchTop100Cryptos();
   }
- 
+
+  
+
   fetchTop100Cryptos(): void {
     let params = new HttpParams()
       .set('vs_currency', 'usd')
@@ -51,6 +53,7 @@ export class AddCryptoComponent implements OnInit {
     this.selectedCrypto = null;
     this.amountOwned = 0;
   }
+
   closeModal() {
     console.log("in add-crypto")
     this.showModal.emit();
