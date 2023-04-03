@@ -1,6 +1,7 @@
 p {
     font-family: 'Work Sans', sans-serif;
     font-size: larger;
+    color: whitesmoke;
 }
     @media screen and (max-width: 600px) {
         body {
@@ -8,4 +9,9 @@ p {
         }
       }
       
-  
+      @media (max-width: 640px) {
+        #lastUpdated{
+          font-size: small;
+        }
+      }
+

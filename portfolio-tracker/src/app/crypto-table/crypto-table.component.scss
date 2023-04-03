@@ -1,0 +1,13 @@
+.responsive-table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  @media (max-width: 640px) {
+    .responsive-table th,
+    .responsive-table td {
+      padding: 8px;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
