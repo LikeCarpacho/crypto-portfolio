@@ -7,7 +7,7 @@ import * as Highcharts from 'highcharts';
   styleUrls: ['./pie-chart.component.scss'],
 })
 export class PieChartComponent implements OnInit, OnChanges {
-  @Input() portfolio: { symbol: string; amount: number; usdPrice:number }[] = [];
+  @Input() portfolio: { symbol: string; amount: number; usdPrice:number; editing:boolean }[] = [];
 
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {};

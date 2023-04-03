@@ -8,19 +8,31 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, EventEmitter, Outpu
 })
 export class CryptoTableComponent {
   
-  @Input() portfolio: { symbol: string; amount: number; usdPrice: number;}[] = [];
-  
+  @Input() portfolio: { symbol: string; amount: number; usdPrice: number; editing:boolean}[] = [];
+  @Output() entryUpdated: EventEmitter<any> = new EventEmitter();
   @Output() entryDeleted = new EventEmitter<string>();
-  
-  
-  deleteEntry(symbol: string) {
-    this.entryDeleted.emit(symbol);
-  }
+
+  editingActive: boolean = false;
+
   currentSort = {
     column: '',
     order: 'asc'
   };
+  
+  deleteEntry(symbol: string) {
+    this.entryDeleted.emit(symbol);
+  }
+  toggleEditing(index: number): void {
+    this.portfolio[index].editing = !this.portfolio[index].editing;
+    this.editingActive = true;
+    if (!this.portfolio[index].editing) {
+      console.log("here")
+      this.entryUpdated.emit(this.portfolio[index]);
+      this.editingActive = false;
 
+    }
+  }
+  //sort table based on col name
   sortTable(column: string) {
     if (this.currentSort.column === column) {
       this.currentSort.order = this.currentSort.order === 'asc' ? 'desc' : 'asc';

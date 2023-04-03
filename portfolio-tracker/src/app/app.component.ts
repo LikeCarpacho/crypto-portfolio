@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  portfolio: { symbol: string; amount: number; usdPrice: number;}[] = [];
+  portfolio: { symbol: string; amount: number; usdPrice: number; editing:boolean}[] = [];
 
   portfolioValue: number = 0;
 
@@ -19,7 +19,7 @@ export class AppComponent {
   ngOnInit(){
     const storedData = localStorage.getItem('cryptoData');
     if (storedData) {
-      this.portfolio = JSON.parse(storedData);
+      this.portfolio = JSON.parse(storedData).map((item: any) => ({ ...item, editing: false }));
     }
     this.updateTotalText();
     
@@ -33,13 +33,13 @@ export class AppComponent {
     }
   }
   //add new holding to global data structure portfolio
-  addToPortfolio(crypto: { symbol: string; amount: number; usdPrice: number; }): void {
+  addToPortfolio(crypto: { symbol: string; amount: number; usdPrice: number; editing: boolean}): void {
     const existingCrypto = this.portfolio.find((c) => c.symbol === crypto.symbol);
     
     if (existingCrypto) {
       existingCrypto.amount += crypto.amount;
     } else {
-      this.portfolio.push(crypto);
+      this.portfolio.push({ ...crypto, editing: false });
     }
     const storedData = localStorage.getItem('cryptoData');
   
@@ -73,7 +73,7 @@ export class AppComponent {
 
     localStorage.removeItem('cryptoData');
     //empty array
-    this.portfolio = [...[]];
+    this.portfolio = [];
     this.updateTotalText();
   }
   //delete specific entry
@@ -90,10 +90,12 @@ export class AppComponent {
       }
 
       this.portfolio = [...this.portfolio];
+      this.updateTotalText();
+
     }
   }
   //update entry
-  updateHolding(updatedCrypto: { symbol: string; amount: number; usdPrice: number; }): void {
+  updateHolding(updatedCrypto: { symbol: string; amount: number; usdPrice: number; editing:boolean }): void {
     const existingCryptoIndex = this.portfolio.findIndex((c) => c.symbol === updatedCrypto.symbol);
     
     if (existingCryptoIndex !== -1) {
@@ -106,6 +108,11 @@ export class AppComponent {
     } else {
       console.error('Crypto not found in portfolio');
     }
+
+    this.portfolio = [...this.portfolio];
+    this.updateTotalText();
+
+
   }
 
   closeModal(){

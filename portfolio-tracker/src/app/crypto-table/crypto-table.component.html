@@ -2,25 +2,37 @@
   <table class="min-w-full divide-y divide-gray-200">
     <thead class="bg-gray-50">
       <tr>
-        <th (click)="sortTable('symbol')" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Symbol</th>
-        <th (click)="sortTable('amount')" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Amount</th>
-        <th (click)="sortTable('usdPrice')" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">USD Price</th>
-        <th (click)="sortTable('totalValue')" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Total Value</th>
-        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Delete</th>
+        <th (click)="sortTable('symbol')" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Symbol</th>
+        <th (click)="sortTable('amount')" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Amount</th>
+        <th (click)="sortTable('usdPrice')" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">USD Price</th>
+        <th (click)="sortTable('totalValue')" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Total Value</th>
+        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
       </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
       <ng-container *ngIf="portfolio.length > 0; else emptyTable">
-        <tr *ngFor="let item of portfolio">
+        <tr *ngFor="let item of portfolio; let i = index;">
           <td class="px-6 py-4 whitespace-nowrap">{{ item.symbol }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ item.amount }}</td>
+          <td class="px-6 py-4 whitespace-nowrap" (click)="toggleEditing(i)">
+            <div *ngIf="!item.editing">{{ item.amount }}</div>
+            <div *ngIf="item.editing" class="flex items-center justify-center">
+              <input style="min-width: 50px;" [(ngModel)]="item.amount" type="number" class="w-1/4 text-center" (click)="$event.stopPropagation()" (keyup.enter)="toggleEditing(i)">
+              <!-- <button (click)="toggleEditing(i); $event.stopPropagation()" class="ml-2 text-white bg-blue-500 px-2 py-1 rounded">Save</button> -->
+            </div>
+          </td>
           <td class="px-6 py-4 whitespace-nowrap">{{ item.usdPrice | currency:'USD' }}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{ item.amount * item.usdPrice | currency:'USD' }}</td>
           <td class="px-6 py-4 whitespace-nowrap">
             <button (click)="deleteEntry(item.symbol)" class="text-red-600 focus:outline-none justify-center items-center">
               <i class="material-icons">delete</i>
             </button>
+            <button (click)="toggleEditing(i); $event.stopPropagation()" class="text-blue-600 focus:outline-none justify-center items-center ml-4">
+              <i *ngIf="!editingActive" class="material-icons">edit</i>
+              <i *ngIf="editingActive" class="material-icons">save</i>
+
+            </button>
           </td>
+          
         </tr>
       </ng-container>
       <ng-template #emptyTable>

@@ -9,7 +9,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class AddCryptoComponent implements OnInit {
 
 
-  @Output() cryptoAdded = new EventEmitter<{ symbol: string; amount: number; usdPrice:number; }>();
+  @Output() cryptoAdded = new EventEmitter<{ symbol: string; amount: number; usdPrice:number; editing:boolean;}>();
 
   @Output() showModal = new EventEmitter<void>;
 
@@ -47,7 +47,8 @@ export class AddCryptoComponent implements OnInit {
     this.cryptoAdded.emit({
       symbol: String(this.selectedCrypto.symbol).toUpperCase(),
       amount: this.amountOwned,
-      usdPrice: this.selectedCrypto.current_price
+      usdPrice: this.selectedCrypto.current_price,
+      editing:false
     });
     
     this.selectedCrypto = null;
