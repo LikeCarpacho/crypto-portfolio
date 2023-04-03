@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http'; // Add this import
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,18 +12,75 @@ export class AppComponent {
 
   portfolioValue: number = 0;
 
+  lastUpdated: string = "";
+
 
   showAddCrypto = false;
+  
+  constructor(private http: HttpClient) {} // Inject HttpClient
 
+  // ...
+
+  fetchTop100Cryptos(): Observable<any> {
+    let params = new HttpParams()
+      .set('vs_currency', 'usd')
+      .set('order', 'market_cap_desc')
+      .set('per_page', '100')
+      .set('page', '1')
+      .set('sparkline', 'false');
+  
+    return this.http.get('https://api.coingecko.com/api/v3/coins/markets', { params });
+  }
+
+  updateCryptoPrices(): void {
+    this.fetchTop100Cryptos().subscribe((data: any) => {
+      data.forEach((coin: any) => {
+        const existingCryptoIndex = this.portfolio.findIndex((c) => c.symbol.toLowerCase() === coin.symbol.toLowerCase());
+        if (existingCryptoIndex !== -1) {
+          this.portfolio[existingCryptoIndex].usdPrice = coin.current_price;
+          // Update localStorage
+          const storedData = localStorage.getItem('cryptoData');
+          let cryptoData = storedData ? JSON.parse(storedData) : [];
+          cryptoData[existingCryptoIndex].usdPrice = coin.current_price;
+          localStorage.setItem('cryptoData', JSON.stringify(cryptoData));
+        }
+      });
+
+      this.portfolio = [...this.portfolio];
+      this.updateTotalText();
+      this.formatCurrentTime();
+    });
+  }
   onShowAddCryptoChanged(value: boolean): void {
     this.showAddCrypto = value;
   }
-
+  formatCurrentTime() {
+    const currentTime = new Date();
+  
+    const currentHours = currentTime.getHours();
+    const currentMinutes = currentTime.getMinutes();
+    const amPm = currentHours >= 12 ? 'PM' : 'AM';
+    const hours12 = currentHours % 12 || 12;
+  
+    this.lastUpdated = `Last updated: Today at ${hours12}:${currentMinutes.toString().padStart(2, '0')} ${amPm}`;
+  }
   ngOnInit(){
+    
+    // Call updateCryptoPrices initially
+    this.updateCryptoPrices(); 
+    
+    // Call updateCryptoPrices every 15 minutes
+    
+    setInterval(() => {
+      this.updateCryptoPrices(); 
+    },7 * 60 * 1000);
+
     const storedData = localStorage.getItem('cryptoData');
+    
     if (storedData) {
       this.portfolio = JSON.parse(storedData).map((item: any) => ({ ...item, editing: false }));
     }
+    
     this.updateTotalText();
     
   }

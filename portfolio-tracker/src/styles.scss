@@ -43,7 +43,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 html {
-  background-color: rgb(2, 2, 24);
+  background-color: #333333;
 }
 
 
@@ -52,8 +52,26 @@ body {
   margin: auto;
   font-family: 'Work Sans', sans-serif;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 td, th {
   text-align: center;
+}
+
+input {
+  background-color: #333333;
+  color: white;
+  border-radius: 15px;
+  padding: 2px;
+  min-width: 100px;
+  margin: 0;
 }
 

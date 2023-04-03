@@ -13,10 +13,10 @@
       <ng-container *ngIf="portfolio.length > 0; else emptyTable">
         <tr *ngFor="let item of portfolio; let i = index;" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
           <td class="px-6 py-4 whitespace-nowrap">{{ item.symbol }}</td>
-          <td class="px-6 py-4 whitespace-nowrap" (click)="toggleEditing(i)">
+          <td class="px-6 py-4 whitespace-nowrap justify-center" style="margin: auto;">
             <div *ngIf="!item.editing">{{ item.amount }}</div>
-            <div *ngIf="item.editing" class="flex items-center justify-center">
-              <input style="min-width: 50px;" [(ngModel)]="item.amount" type="number" class="w-1/4 text-center" (click)="$event.stopPropagation()" (keyup.enter)="toggleEditing(i)">
+            <div *ngIf="item.editing" class="flex items-center justify-center w-1" style="margin: auto;">
+              <input [(ngModel)]="item.amount" type="number" class="w-1/4 text-center no-spinner " (click)="$event.stopPropagation()" (keyup.enter)="toggleEditing(i)">
               <!-- <button (click)="toggleEditing(i); $event.stopPropagation()" class="ml-2 text-white bg-blue-500 px-2 py-1 rounded">Save</button> -->
             </div>
           </td>
@@ -27,9 +27,8 @@
               <i class="material-icons">delete</i>
             </button>
             <button (click)="toggleEditing(i); $event.stopPropagation()" class="text-blue-600 focus:outline-none justify-center items-center ml-4">
-              <i *ngIf="!editingActive" class="material-icons">edit</i>
-              <i *ngIf="editingActive" class="material-icons">save</i>
-
+              <i *ngIf="!item.editing" class="material-icons">edit</i>
+              <i *ngIf="item.editing" class="material-icons">save</i>
             </button>
           </td>
           
