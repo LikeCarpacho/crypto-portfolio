@@ -9,6 +9,9 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { FormsModule } from '@angular/forms';
 import { CryptoTableComponent } from './crypto-table/crypto-table.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { UpdateHoldingComponent } from './update-holding/update-holding.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     AddCryptoComponent,
     PieChartComponent,
     CryptoTableComponent,
-    NavBarComponent
+    NavBarComponent,
+    UpdateHoldingComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +28,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     HighchartsChartModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

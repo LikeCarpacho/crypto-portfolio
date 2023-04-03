@@ -7,7 +7,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   styleUrls: ['./add-crypto.component.scss'],
 })
 export class AddCryptoComponent implements OnInit {
+
   @Output() cryptoAdded = new EventEmitter<{ symbol: string; amount: number; usdPrice:number; }>();
+
+  @Output() showModal = new EventEmitter<void>;
+
+
   top100Cryptos: any[] = [];
   selectedCrypto: any;
   amountOwned: number = 0;
@@ -42,9 +47,12 @@ export class AddCryptoComponent implements OnInit {
       amount: this.amountOwned,
       usdPrice: this.selectedCrypto.current_price
     });
-  
+    
     this.selectedCrypto = null;
     this.amountOwned = 0;
   }
-  
+  closeModal() {
+    console.log("in add-crypto")
+    this.showModal.emit();
+  }
 }

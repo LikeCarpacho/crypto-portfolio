@@ -14,8 +14,10 @@
 
   <app-nav-bar style="z-index: 5;"
   (showAddCryptoChanged)="onShowAddCryptoChanged($event)"
-  (clearDataEvent)="clearData()"></app-nav-bar>
-  <app-add-crypto *ngIf="showAddCrypto" (cryptoAdded)="addToPortfolio($event)"></app-add-crypto>
+  (clearDataEvent)="clearData()
+  "></app-nav-bar>
+  <app-add-crypto *ngIf="showAddCrypto" (cryptoAdded)="addToPortfolio($event)" (showModal)="closeModal()"></app-add-crypto>
+
   <div *ngIf="portfolio.length > 0">
     <p style="text-align: center;">Your portfolio is worth {{portfolioValue | currency:"USD"}}.</p>
     <app-pie-chart [portfolio]="portfolio"></app-pie-chart>

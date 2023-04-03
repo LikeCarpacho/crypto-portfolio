@@ -92,4 +92,24 @@ export class AppComponent {
       this.portfolio = [...this.portfolio];
     }
   }
+  //update entry
+  updateHolding(updatedCrypto: { symbol: string; amount: number; usdPrice: number; }): void {
+    const existingCryptoIndex = this.portfolio.findIndex((c) => c.symbol === updatedCrypto.symbol);
+    
+    if (existingCryptoIndex !== -1) {
+      this.portfolio[existingCryptoIndex] = updatedCrypto;
+      const storedData = localStorage.getItem('cryptoData');
+      let cryptoData = storedData ? JSON.parse(storedData) : [];
+      cryptoData[existingCryptoIndex] = updatedCrypto;
+      localStorage.setItem('cryptoData', JSON.stringify(cryptoData));
+      console.log(this.portfolio)
+    } else {
+      console.error('Crypto not found in portfolio');
+    }
+  }
+
+  closeModal(){
+    this.showAddCrypto = false;
+  }
+  
 }
