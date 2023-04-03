@@ -1,17 +1,17 @@
-<div class="overflow-x-auto">
-  <table class="min-w-full divide-y divide-gray-200">
-    <thead class="bg-gray-50">
+<div class="overflow-x-auto shadow-md sm:rounded-lg">
+  <table class="w-full  text-gray-400 uppercase bg-gray-50 dark:bg-gray-00 dark:text-gray-400">
+    <thead class="text-xs text-gray-400 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
       <tr>
-        <th (click)="sortTable('symbol')" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Symbol</th>
-        <th (click)="sortTable('amount')" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Amount</th>
-        <th (click)="sortTable('usdPrice')" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">USD Price</th>
-        <th (click)="sortTable('totalValue')" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">Total Value</th>
-        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+        <th (click)="sortTable('symbol')" class="px-6 py-3 text-center text-xs font-medium text-gray-100 uppercase tracking-wider cursor-pointer">Symbol</th>
+        <th (click)="sortTable('amount')" class="px-6 py-3 text-center text-xs font-medium text-gray-100 uppercase tracking-wider cursor-pointer">Amount</th>
+        <th (click)="sortTable('usdPrice')" class="px-6 py-3 text-center text-xs font-medium text-gray-100 uppercase tracking-wider cursor-pointer">USD Price</th>
+        <th (click)="sortTable('totalValue')" class="px-6 py-3 text-center text-xs font-medium text-gray-100 uppercase tracking-wider cursor-pointer">Total Value</th>
+        <th class="px-6 py-3 text-center text-xs font-medium text-gray-100 uppercase tracking-wider">Actions</th>
       </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
       <ng-container *ngIf="portfolio.length > 0; else emptyTable">
-        <tr *ngFor="let item of portfolio; let i = index;">
+        <tr *ngFor="let item of portfolio; let i = index;" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
           <td class="px-6 py-4 whitespace-nowrap">{{ item.symbol }}</td>
           <td class="px-6 py-4 whitespace-nowrap" (click)="toggleEditing(i)">
             <div *ngIf="!item.editing">{{ item.amount }}</div>

@@ -40,6 +40,7 @@ export class PieChartComponent implements OnInit, OnChanges {
     this.chartOptions = {
       chart: {
         type: 'pie',
+        backgroundColor:'rgb(2, 2, 24)'
       },
       title: {
         text: '',
