@@ -1,9 +1,10 @@
 const express = require('express');
 const path = require('path');
-
+const compression = require('compression');
 const app = express();
 const PORT = process.env.PORT || 4200;
 
+app.use(compression());
 
 // Set correct MIME types for static files
 app.use(express.static('./dist/portfolio-tracker', {
