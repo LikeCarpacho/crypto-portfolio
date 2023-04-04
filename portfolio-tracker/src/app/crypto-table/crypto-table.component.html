@@ -14,7 +14,7 @@
         <tr *ngFor="let item of portfolio; let i = index;" class=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
           <td class="px-6 py-4 whitespace-nowrap" >
             <div class="symbol-container">
-              <img [src]="'assets/cryptocurrency-icons/' + item.symbol.toLowerCase() + '@2x.png'" alt="{{ item.symbol }} Icon" class="icon-size"/>
+              <img (error)="setSrc($event)" [src]="'assets/cryptocurrency-icons/' + item.symbol.toLowerCase() + '@2x.png'" alt="{{ item.symbol }} Icon" class="icon-size"/>
               <span>{{ item.symbol }}</span>
             </div>
           </td>

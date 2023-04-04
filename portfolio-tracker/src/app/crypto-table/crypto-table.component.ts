@@ -24,6 +24,11 @@ export class CryptoTableComponent {
     this.entryDeleted.emit(symbol);
   }
 
+  setSrc(event: Event){
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'assets/cryptocurrency-icons/generic@2x.png';
+  }
+
   deleteConfirmed(symbol: string) {
     this.showConfirmationDialog = false;
     this.deleteEntry(symbol);
