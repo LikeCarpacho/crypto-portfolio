@@ -1,13 +1,30 @@
 .responsive-table {
     width: 100%;
     table-layout: fixed;
+    border-collapse: collapse;
   }
-
+  .responsive-table td{
+    border: none;
+  }
   @media (max-width: 640px) {
     .responsive-table th,
     .responsive-table td {
       padding: 8px;
       font-size: 12px;
       text-align: center;
+      border: none;
     }
   }
+
+  .symbol-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon-size {
+    width: 25px;
+    height: 25px;
+    margin-right: 4px;
+  }
+  
