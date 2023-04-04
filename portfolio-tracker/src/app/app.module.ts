@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CustomDropdownComponent } from './custom-dropdown/custom-dropdown.component';
 import { CryptoConverterComponent } from './crypto-converter/crypto-converter.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CryptoConverterComponent } from './crypto-converter/crypto-converter.co
     NavBarComponent,
     UpdateHoldingComponent,
     CustomDropdownComponent,
-    CryptoConverterComponent
+    CryptoConverterComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -48,7 +48,7 @@ export class PieChartComponent implements OnInit, OnChanges {
     this.chartOptions = {
       chart: {
         type: 'pie',
-        backgroundColor:'#333333'
+        backgroundColor:''
       },
       title: {
         text: '',
@@ -58,7 +58,7 @@ export class PieChartComponent implements OnInit, OnChanges {
           type: 'pie',
           name: '$',
           data,
-          colors:["#000044","black","gray","darkgray","red"]
+          colors:["#004c8c","#006a90","#4a6380","#3c8086","#3c3c80"]
         },
         
       ],

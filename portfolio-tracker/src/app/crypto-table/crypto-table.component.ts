@@ -11,6 +11,7 @@ export class CryptoTableComponent {
   @Input() portfolio: { symbol: string; amount: number; usdPrice: number; editing:boolean}[] = [];
   @Output() entryUpdated: EventEmitter<any> = new EventEmitter();
   @Output() entryDeleted = new EventEmitter<string>();
+  showConfirmationDialog = false;
 
   editingActive: boolean = false;
 
@@ -21,6 +22,19 @@ export class CryptoTableComponent {
   
   deleteEntry(symbol: string) {
     this.entryDeleted.emit(symbol);
+  }
+
+  deleteConfirmed(symbol: string) {
+    this.showConfirmationDialog = false;
+    this.deleteEntry(symbol);
+  }
+
+  deleteCancelled() {
+    this.showConfirmationDialog = false;
+  }
+
+  showDeleteConfirmation() {
+    this.showConfirmationDialog = true;
   }
   toggleEditing(index: number): void {
     this.portfolio[index].editing = !this.portfolio[index].editing;
