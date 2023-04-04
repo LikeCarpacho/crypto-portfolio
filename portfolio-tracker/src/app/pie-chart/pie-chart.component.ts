@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { enableDebugTools } from '@angular/platform-browser';
 import * as Highcharts from 'highcharts';
 import { Tooltip } from 'highcharts/highcharts.src';
 
@@ -64,6 +65,9 @@ export class PieChartComponent implements OnInit, OnChanges {
       ],
       tooltip:{
         pointFormat: '{point.yString} <b>({point.pect:.1f}%)</b>',
+      },
+      credits :{
+        enabled:false
       }
 
     };

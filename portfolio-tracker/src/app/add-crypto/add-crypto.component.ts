@@ -44,6 +44,12 @@ export class AddCryptoComponent implements OnInit {
   }
 
   addCrypto(): void {
+
+    if(this.amountOwned < 0){
+      this.selectedCrypto = null;
+      this.amountOwned = 0;
+      return;
+    }
     this.cryptoAdded.emit({
       symbol: String(this.selectedCrypto.symbol).toUpperCase(),
       amount: this.amountOwned,
@@ -51,10 +57,9 @@ export class AddCryptoComponent implements OnInit {
       editing:false
     });
     
-    this.selectedCrypto = null;
-    this.amountOwned = 0;
+    
   }
-
+  //clode modal on succesful emit
   closeModal() {
     console.log("in add-crypto")
     this.showModal.emit();

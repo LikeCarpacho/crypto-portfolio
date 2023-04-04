@@ -37,15 +37,17 @@ export class CryptoTableComponent {
     this.showConfirmationDialog = true;
   }
   toggleEditing(index: number): void {
-    this.portfolio[index].editing = !this.portfolio[index].editing;
-    this.editingActive = true;
-    if (!this.portfolio[index].editing) {
-      console.log("here")
-      this.entryUpdated.emit(this.portfolio[index]);
-      this.editingActive = false;
+    if(this.portfolio[index].amount > 0){
+      this.portfolio[index].editing = !this.portfolio[index].editing;
+      this.editingActive = true;
 
-    }
+      if (!this.portfolio[index].editing) {
+        this.entryUpdated.emit(this.portfolio[index]);
+        this.editingActive = false;
+      }
+      
   }
+}
   //sort table based on col name
   sortTable(column: string) {
     if (this.currentSort.column === column) {
