@@ -28,7 +28,7 @@
           <td class="px-6 py-4 whitespace-nowrap">{{ item.usdPrice | currency:'USD' }}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{ item.amount * item.usdPrice | currency:'USD' }}</td>
           <td class="px-6 py-4 whitespace-nowrap justify-center">
-            <button (click)="toggleEditing(i); $event.stopPropagation()" class="text-blue-600 focus:outline-none justify-center items-center ml-4">
+            <button (click)="toggleEditing(i); $event.stopPropagation()" class="text-blue-600 focus:outline-none justify-center items-center ml-4" style="margin: 0; padding: 0;">
               <i *ngIf="!item.editing" class="material-icons">edit</i>
               <i *ngIf="item.editing" class="material-icons">save</i>
             </button>
@@ -37,7 +37,7 @@
               (confirm)="deleteConfirmed(item.symbol)"
               (cancel)="deleteCancelled()"
             ></app-confirmation-dialog>
-            <button (click)="showDeleteConfirmation()" class="text-red-600 focus:outline-none justify-center items-center">
+            <button (click)="showDeleteConfirmation()" class="text-red-600 focus:outline-none justify-center items-center" style="margin: 0; padding: 0;">
               <i class="material-icons">delete</i>
             </button>
             
