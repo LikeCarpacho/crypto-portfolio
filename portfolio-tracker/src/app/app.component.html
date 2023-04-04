@@ -29,7 +29,7 @@
 
   </div>
   <app-crypto-converter class="flex w-1/2 justify-center" *ngIf="showConverter" [top100Cryptos]="cryptosList" style="margin: auto;"></app-crypto-converter>
-  <p id="lastUpdated" style="text-align: right; color: whitesmoke;">{{lastUpdated}}</p>
+  <p *ngIf="portfolio.length > 1" id="lastUpdated" style="text-align: right; color: whitesmoke;">{{lastUpdated}}</p>
 
 
  
