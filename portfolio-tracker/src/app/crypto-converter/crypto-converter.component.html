@@ -1,14 +1,18 @@
-<div class="flex space-x-8 justify-center" >
+<div class="crypto-inputs flex justify-center w-full items-center" style="gap:10px;">
     <div class="flex flex-col items-center">
-      <select style="background-color: #333333;color: white" [(ngModel)]="selectedCrypto1" class="mb-2 bg-white border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500">
+      <select style="background-color: #333333; color: white" [(ngModel)]="selectedCrypto1" class="mb-2 bg-white border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500">
         <option *ngFor="let crypto of top100Cryptos" [value]="crypto.id">{{ crypto.name }}</option>
       </select>
       <input style="background-color: #333333;" [(ngModel)]="amount1" (input)="onCrypto1AmountChange()" type="number" min="0" step="any" placeholder="Enter amount" class="bg-white border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500" />
     </div>
+    <div style="width: 50px;">
+      <i class="material-icons" style="color: whitesmoke;">compare_arrows</i>
+    </div>
+    
     <div class="flex flex-col items-center">
-      <select style="background-color: #333333;color: white" [(ngModel)]="selectedCrypto2" class="mb-2 bg-white border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500">
+      <select style="background-color: #333333; color: white" [(ngModel)]="selectedCrypto2" class="mb-2 bg-white border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500">
         <option *ngFor="let crypto of top100Cryptos" [value]="crypto.id">{{ crypto.name }}</option>
       </select>
-      <input style="background-color: #333333; ;" [(ngModel)]="amount2" (input)="onCrypto2AmountChange()" type="number" min="0" step="any" placeholder="Enter amount" class="bg-white border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500" />
+      <input style="background-color: #333333;" [(ngModel)]="amount2" (input)="onCrypto2AmountChange()" type="number" min="0" step="any" placeholder="Enter amount" class="bg-white border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500" />
     </div>
 </div>

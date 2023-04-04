@@ -1,17 +1,29 @@
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+.crypto-inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.crypto-inputs > div {
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.crypto-inputs select,
+.crypto-inputs input {
+  width: 100%;
+}
+
+/* Media query for larger screens */
+@media (min-width: 640px) {
+  .crypto-inputs {
+    flex-direction: row;
+    justify-content: space-evenly;
   }
-  
-  .crypto-select {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+  .crypto-inputs > div {
+    padding: 0;
   }
-  
-  select {
-    margin-bottom: 0.5rem;
-  }
-  
+}
