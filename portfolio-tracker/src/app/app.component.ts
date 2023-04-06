@@ -33,7 +33,7 @@ export class AppComponent {
       .set('page', '1')
       .set('sparkline', 'false');
   
-    return this.http.get('https://api.coingecko.com/api/v3/coins/markets', { params });
+    return this.http.get('https://crypto-prices-api-production.up.railway.app/prices');
   }
 
   updateCryptoPrices(): void {
@@ -42,11 +42,11 @@ export class AppComponent {
       data.forEach((coin: any) => {
         const existingCryptoIndex = this.portfolio.findIndex((c) => c.symbol.toLowerCase() === coin.symbol.toLowerCase());
         if (existingCryptoIndex !== -1) {
-          this.portfolio[existingCryptoIndex].usdPrice = coin.current_price;
+          this.portfolio[existingCryptoIndex].usdPrice = coin.prices[0].price;
           // Update localStorage
           const storedData = localStorage.getItem('cryptoData');
           let cryptoData = storedData ? JSON.parse(storedData) : [];
-          cryptoData[existingCryptoIndex].usdPrice = coin.current_price;
+          cryptoData[existingCryptoIndex].usdPrice = coin.prices[0].price;
           localStorage.setItem('cryptoData', JSON.stringify(cryptoData));
         }
       });

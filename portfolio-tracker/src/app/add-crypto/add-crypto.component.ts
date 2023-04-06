@@ -24,21 +24,12 @@ export class AddCryptoComponent implements OnInit {
     this.fetchTop100Cryptos();
   }
 
-  
-
   fetchTop100Cryptos(): void {
-    let params = new HttpParams()
-      .set('vs_currency', 'usd')
-      .set('order', 'market_cap_desc')
-      .set('per_page', '100')
-      .set('page', '1')
-      .set('sparkline', 'false');
   
     this.http
-      .get('https://api.coingecko.com/api/v3/coins/markets', { params })
+      .get('https://crypto-prices-api-production.up.railway.app/prices')
       .subscribe((data: any) => {
         this.top100Cryptos = data.map((coin: any) => coin);
-          // Check if there's a saved crypto and amount owned in localStorage
       });
 
   }
@@ -53,7 +44,7 @@ export class AddCryptoComponent implements OnInit {
     this.cryptoAdded.emit({
       symbol: String(this.selectedCrypto.symbol).toUpperCase(),
       amount: this.amountOwned,
-      usdPrice: this.selectedCrypto.current_price,
+      usdPrice: this.selectedCrypto.prices[0].price,
       editing:false
     });
     

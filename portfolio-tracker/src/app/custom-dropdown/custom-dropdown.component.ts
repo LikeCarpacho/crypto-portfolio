@@ -28,7 +28,6 @@ export class CustomDropdownComponent implements OnInit {
     }
   }
   filterItems(searchText: string) {
-    console.log(searchText)
     if(searchText !== ""){
       this.filteredItems = this.items.filter(item =>
         item.name.toLowerCase().includes(searchText.toLowerCase()) || item.symbol.toLowerCase().includes(searchText.toLowerCase())
@@ -47,7 +46,6 @@ export class CustomDropdownComponent implements OnInit {
   }
 
   selectItem(item: any) {
-    console.log(this.items)
     this.selected = item;
     this.selectedItem.emit(item);
     this.isOpen = false;
