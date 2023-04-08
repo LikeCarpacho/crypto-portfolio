@@ -5,8 +5,9 @@ const PORT = process.env.PORT || 4200;
 
 app.use(compression());
 
-let apiCallCount = 0
-// Set correct MIME types for static files
+let apiCallCount = 0;
+
+// Set correct MIME types; for static files
 app.use(express.static('dist/portfolio-tracker', {
   setHeaders: (res, path) => {
     if (path.endsWith('.js')) {
