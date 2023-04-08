@@ -1,13 +1,19 @@
 const express = require('express');
-const path = require('path');
 const compression = require('compression');
 const app = express();
 const PORT = process.env.PORT || 4200;
 
 app.use(compression());
 
+let apiCallCount = 0
+
+app.use((req, res, next) => {
+  apiCallCount++;
+  console.log(`API has been called ${apiCallCount} times.`);
+  next();
+});
 // Set correct MIME types for static files
-app.use(express.static('./dist/portfolio-tracker', {
+app.use(express.static('dist/portfolio-tracker', {
   setHeaders: (res, path) => {
     if (path.endsWith('.js')) {
       res.setHeader('Content-Type', 'application/javascript');
@@ -18,7 +24,7 @@ app.use(express.static('./dist/portfolio-tracker', {
 }));
 
 app.get('/*', (req, res) => {
-  res.sendFile('index.html', {root: 'dist/your-angular-app/'});
+  res.sendFile('index.html', {root: './dist/portfolio-tracker'});
 });
 
 app.listen(PORT, () => { 
