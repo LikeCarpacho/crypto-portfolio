@@ -6,12 +6,6 @@ const PORT = process.env.PORT || 4200;
 app.use(compression());
 
 let apiCallCount = 0
-
-app.use((req, res, next) => {
-  apiCallCount++;
-  console.log(`API has been called ${apiCallCount} times.`);
-  next();
-});
 // Set correct MIME types for static files
 app.use(express.static('dist/portfolio-tracker', {
   setHeaders: (res, path) => {
@@ -24,6 +18,8 @@ app.use(express.static('dist/portfolio-tracker', {
 }));
 
 app.get('/*', (req, res) => {
+  apiCallCount++;
+  console.log(`API has been called ${apiCallCount} times.`);
   res.sendFile('index.html', {root: './dist/portfolio-tracker'});
 });
 
