@@ -45,12 +45,12 @@
           
         </tr>
         <div
-          class="fixed inset-0 z-50 flex items-center justify-center"
+          class="modal-container"
           *ngIf="showModal"
           (click)="toggleModal()"
         >
           <div
-            class="bg-white dark:bg-gray-700 dark:text-gray-300 rounded-lg w-full sm:w-2/3 md:w-1/2 lg:w-1/3 p-6 mx-4"
+            class="modal dark"
             (click)="$event.stopPropagation()"
           >
             <h2 class="text-lg font-semibold mb-4">
@@ -62,7 +62,7 @@
               <div id="chartContainer"></div>
             </h2>
             <button
-              class="text-white bg-blue-500 px-4 py-2 rounded"
+              class="close-btn"
               (click)="toggleModal()"
             >
               Close

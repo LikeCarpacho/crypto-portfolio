@@ -27,4 +27,50 @@
     height: 25px;
     margin-right: 4px;
   }
-  
+  .modal-container {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal {
+    background-color: white;
+    color: black;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 1rem;
+    width: 100%;
+  }
+
+  .modal.dark {
+    background-color: #1a202c;
+    color: #d1d5db;
+  }
+
+  .close-btn {
+    color: white;
+    background-color: #3b82f6;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .modal {
+      width: 66.666667%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .modal {
+      width: 50%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .modal {
+      width: 33.333333%;
+    }
+  }
