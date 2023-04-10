@@ -11,7 +11,7 @@
     </thead>
     <tbody class="">
       <ng-container *ngIf="portfolio.length > 0; else emptyTable">
-        <tr *ngFor="let item of portfolio; let i = index;" class=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+        <tr *ngFor="let item of portfolio; let i = index;" class=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 hover:cursor-pointer" (click)="openModal(item.symbol)">
           <td class="px-6 py-4 whitespace-nowrap" >
             <div class="symbol-container">
               <img (error)="setSrc($event)" [src]="'assets/cryptocurrency-icons/' + item.symbol.toLowerCase() + '@2x.png'" alt="{{ item.symbol }} Icon" class="icon-size"/>
@@ -44,6 +44,32 @@
           </td>
           
         </tr>
+        <div
+          class="fixed inset-0 z-50 flex items-center justify-center"
+          *ngIf="showModal"
+          (click)="toggleModal()"
+        >
+          <div
+            class="bg-white dark:bg-gray-700 dark:text-gray-300 rounded-lg w-full sm:w-2/3 md:w-1/2 lg:w-1/3 p-6 mx-4"
+            (click)="$event.stopPropagation()"
+          >
+            <h2 class="text-lg font-semibold mb-4">
+              <div class="symbol-container">
+                <img (error)="setSrc($event)" [src]="'assets/cryptocurrency-icons/' + clickedAssetName.toLowerCase() + '@2x.png'" alt="{{ clickedAssetName }} Icon" class="icon-size"/>
+                <span class="font-normal">{{ clickedAssetName }}</span>
+              </div>
+              <p *ngIf="graphLoading">Loading</p>
+              <div id="chartContainer"></div>
+            </h2>
+            <button
+              class="text-white bg-blue-500 px-4 py-2 rounded"
+              (click)="toggleModal()"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+
       </ng-container>
       <ng-template #emptyTable>
         <tr>

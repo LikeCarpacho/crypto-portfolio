@@ -1,5 +1,8 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http'; // Add this import
+import { response } from 'express';
 
+import * as Highcharts from 'highcharts';
 
 @Component({
   selector: 'app-crypto-table',
@@ -9,8 +12,15 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, EventEmitter, Outpu
 export class CryptoTableComponent {
   
   @Input() portfolio: { symbol: string; amount: number; usdPrice: number; editing:boolean}[] = [];
+  
   @Output() entryUpdated: EventEmitter<any> = new EventEmitter();
+  
   @Output() entryDeleted = new EventEmitter<string>();
+  
+  graphLoading: boolean = true;
+
+  constructor(private http: HttpClient) {} // Inject HttpClient
+
   showConfirmationDialog = false;
 
   editingActive: boolean = false;
@@ -19,6 +29,95 @@ export class CryptoTableComponent {
     column: '',
     order: 'asc'
   };
+
+  showModal: boolean = false;
+  
+  clickedAssetName: string = '';
+
+  toggleModal() {
+    this.showModal = !this.showModal;
+  }
+
+  openModal(assetName: string) {
+    this.clickedAssetName = assetName;
+    this.graphLoading = true;
+
+    let graphData:any = {
+      priceArray:[],
+      timeArray:[]
+    }
+
+    this.http.get("https://crypto-prices-api-production.up.railway.app/graphData?name="+assetName.toLowerCase()).subscribe(
+      (response:any)=>{
+        response[0].prices.forEach((element:any) => {
+          graphData['priceArray'].push(element.price);
+          graphData['timeArray'].push(this.formatTimestamp(element.timestamp));
+        });
+        this.drawGraph(graphData);
+        this.graphLoading = false;
+      }
+    )   
+    this.toggleModal(); 
+
+  }
+  formatTimestamp(timestamp:any) {
+    const date = new Date(timestamp);
+    const now = new Date();
+  
+    const isToday =
+      date.getDate() === now.getDate() &&
+      date.getMonth() === now.getMonth() &&
+      date.getFullYear() === now.getFullYear();
+  
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')}`;
+  
+    return isToday ? `today at ${formattedTime}` : `${date.getDay()} at ${formattedTime}`;
+  }
+  
+  drawGraph(graphData: any) {
+    const options: Highcharts.Options = {
+      chart: {
+        type: 'line',
+        renderTo: 'chartContainer',
+        backgroundColor:'transparent'
+      },
+      title: {
+        text: ''
+      },
+      xAxis: {
+        categories: graphData['timeArray'],
+        title: {
+          text: ''
+        },
+        tickInterval:3,
+        labels:{
+          rotation:-20
+        }
+      },
+      yAxis: {
+        title: {
+          text: 'Price'
+        }
+      },
+      series: [
+        {
+          type: 'line',
+          name: 'Price',
+          data: graphData['priceArray'],
+        }
+      ],
+      credits:{
+        text:""
+      },
+      legend:{
+        enabled:false
+      }
+    };
+  
+    Highcharts.chart(options);
+  }
   
   deleteEntry(symbol: string) {
     this.entryDeleted.emit(symbol);
