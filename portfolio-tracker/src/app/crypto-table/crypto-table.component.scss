@@ -57,6 +57,12 @@
     border-radius: 0.25rem;
   }
 
+  @media (min-width: 500px) {
+    .modal {
+      width: 80%;
+    }
+  }
+
   @media (min-width: 640px) {
     .modal {
       width: 66.666667%;

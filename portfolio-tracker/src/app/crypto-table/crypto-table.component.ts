@@ -73,9 +73,9 @@ export class CryptoTableComponent {
     const minutes = date.getMinutes();
     const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')}`;
   
-    return isToday ? `today at ${formattedTime}` : `${date.getDay()} at ${formattedTime}`;
+    return isToday ? `Today at ${formattedTime}` : `Yesterday at ${formattedTime}`;
   }
-  
+
   drawGraph(graphData: any) {
     const options: Highcharts.Options = {
       chart: {
