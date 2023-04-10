@@ -11,7 +11,7 @@
     </thead>
     <tbody class="">
       <ng-container *ngIf="portfolio.length > 0; else emptyTable">
-        <tr *ngFor="let item of portfolio; let i = index;" class=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 hover:cursor-pointer" (click)="openModal(item.symbol)">
+        <tr *ngFor="let item of portfolio; let i = index;" class=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 hover:cursor-pointer">
           <td class="px-6 py-4 whitespace-nowrap" >
             <div class="symbol-container">
               <img (error)="setSrc($event)" [src]="'assets/cryptocurrency-icons/' + item.symbol.toLowerCase() + '@2x.png'" alt="{{ item.symbol }} Icon" class="icon-size"/>
@@ -27,7 +27,7 @@
           </td>
           <td class="px-6 py-4 whitespace-nowrap">{{ item.usdPrice | currency:'USD' }}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{ item.amount * item.usdPrice | currency:'USD' }}</td>
-          <td class="px-6 py-4 whitespace-nowrap justify-center">
+          <td class="px-6 py-4 whitespace-nowrap justify-center" (mousedown)="$event.stopPropagation()">
             <button (click)="toggleEditing(i); $event.stopPropagation()" class="text-blue-600 focus:outline-none justify-center items-center ml-4" style="margin: 0; padding: 0;">
               <i *ngIf="!item.editing" class="material-icons">edit</i>
               <i *ngIf="item.editing" class="material-icons">save</i>
@@ -37,9 +37,13 @@
               (confirm)="deleteConfirmed(item.symbol)"
               (cancel)="deleteCancelled()"
             ></app-confirmation-dialog>
-            <button (click)="showDeleteConfirmation()" class="text-red-600 focus:outline-none justify-center items-center" style="margin: 0; padding: 0;">
+            <button (mousedown)="openModal(item.symbol); $event.stopPropagation()" class="text-green-600 focus:outline-none justify-center items-center ml-4" style="margin: 0; padding: 0;">
+              <i class="material-icons">bar_chart</i>
+            </button>
+            <button (mousedown)="showDeleteConfirmation(); $event.stopPropagation()" class="text-red-600 focus:outline-none justify-center items-center ml-4" style="margin: 0; padding: 0;">
               <i class="material-icons">delete</i>
             </button>
+            
             
           </td>
           

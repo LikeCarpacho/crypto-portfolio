@@ -57,26 +57,27 @@
     border-radius: 0.25rem;
   }
 
-  @media (min-width: 500px) {
+  @media screen and (min-width: 500px) and (min-resolution: 192dpi) {
     .modal {
-      width: 80%;
+      width: 100%;
     }
   }
-
-  @media (min-width: 640px) {
+  
+  @media screen and (min-width: 640px) and (min-resolution: 192dpi) {
     .modal {
-      width: 66.666667%;
+      width: 86.666667%;
     }
   }
-
-  @media (min-width: 768px) {
+  
+  @media screen and (min-width: 768px) and (min-resolution: 192dpi) {
     .modal {
-      width: 50%;
+      width: 60%;
     }
   }
-
-  @media (min-width: 1024px) {
+  
+  @media screen and (min-width: 1024px) and (min-resolution: 192dpi) {
     .modal {
       width: 33.333333%;
     }
   }
+  
