@@ -11,7 +11,7 @@
     </thead>
     <tbody class="">
       <ng-container *ngIf="portfolio.length > 0; else emptyTable">
-        <tr *ngFor="let item of portfolio; let i = index;" class=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 hover:cursor-pointer">
+        <tr *ngFor="let item of portfolio; let i = index;" class=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
           <td class="px-6 py-4 whitespace-nowrap" >
             <div class="symbol-container">
               <img (error)="setSrc($event)" [src]="'assets/cryptocurrency-icons/' + item.symbol.toLowerCase() + '@2x.png'" alt="{{ item.symbol }} Icon" class="icon-size"/>
