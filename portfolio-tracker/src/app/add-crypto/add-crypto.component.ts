@@ -18,7 +18,9 @@ export class AddCryptoComponent implements OnInit {
   amountOwned: number = 0;
   searchQuery: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.fetchTop100Cryptos();
+  }
 
   ngOnInit(): void {
     this.fetchTop100Cryptos();
