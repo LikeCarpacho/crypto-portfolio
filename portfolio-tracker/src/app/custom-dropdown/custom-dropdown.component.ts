@@ -26,6 +26,7 @@ export class CustomDropdownComponent implements OnInit {
       this.selected.name = "Select Option";
       this.selected.symbol = "$ABC"
     }
+    this.filteredItems = [...this.items];
   }
   filterItems(searchText: string) {
     if(searchText !== ""){
