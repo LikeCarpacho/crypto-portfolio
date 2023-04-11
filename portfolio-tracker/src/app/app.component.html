@@ -12,11 +12,12 @@
   (showConverterChanged)="onShowConverterChanged($event)"
   (clearDataEvent)="clearData()
   "></app-nav-bar>
-  <p style="text-align:right; color: whitesmoke; padding-top: 5px;" *ngIf="portfolio.length < 1">Want to get started? Add a new holding by clicking the menu</p>
   
 </div>
+<p style="text-align:right; color: whitesmoke;  width: 50%; margin-left: auto; " *ngIf="portfolio.length < 1">Want to get started? Add a new holding by clicking the menu</p>
 
 <div class="container mx-auto flex flex-col justify-center" style="padding-top: 50px; ">
+
   <div style="padding-left: 0px;">
   </div>  
   <app-add-crypto *ngIf="showAddCrypto" (cryptoAdded)="addToPortfolio($event)" (showModal)="closeModal()"></app-add-crypto>
