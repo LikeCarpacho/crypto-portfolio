@@ -18,6 +18,7 @@ export class AddCryptoComponent implements OnInit {
   @Input() top100Cryptos: any[] = [];
   selectedCrypto: any;
   amountOwned: number = 0;
+  initialInput: boolean = true;
   searchQuery: string = '';
 
   constructor(private http: HttpClient) {
@@ -41,7 +42,7 @@ export class AddCryptoComponent implements OnInit {
   addCrypto(): void {
 
     if(this.amountOwned < 0){
-      this.selectedCrypto = null;
+      this.selectedCrypto = 0;
       this.amountOwned = 0;
       return;
     }
@@ -53,6 +54,12 @@ export class AddCryptoComponent implements OnInit {
     });
     
     
+  }
+  updateAmount(value: number): void {
+    if (this.initialInput) {
+      this.initialInput = false;
+    }
+    this.amountOwned = value;
   }
   //clode modal on succesful emit
   closeModal() {
