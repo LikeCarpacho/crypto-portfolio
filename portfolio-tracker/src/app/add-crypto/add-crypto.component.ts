@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
@@ -13,28 +13,30 @@ export class AddCryptoComponent implements OnInit {
 
   @Output() showModal = new EventEmitter<void>;
 
-  top100Cryptos: any[] = [];
+  // @Input() topCryptos = [];
+
+  @Input() top100Cryptos: any[] = [];
   selectedCrypto: any;
   amountOwned: number = 0;
   searchQuery: string = '';
 
   constructor(private http: HttpClient) {
-    this.fetchTop100Cryptos();
+    // this.fetchTop100Cryptos();
   }
 
   ngOnInit(): void {
-    this.fetchTop100Cryptos();
+    // this.fetchTop100Cryptos();
   }
 
-  fetchTop100Cryptos(): void {
+  // fetchTop100Cryptos(): void {
   
-    this.http
-      .get('https://crypto-prices-api-production.up.railway.app/prices')
-      .subscribe((data: any) => {
-        this.top100Cryptos = data.map((coin: any) => coin);
-      });
+  //   this.http
+  //     .get('https://crypto-prices-api-production.up.railway.app/prices')
+  //     .subscribe((data: any) => {
+  //       this.top100Cryptos = data.map((coin: any) => coin);
+  //     });
 
-  }
+  // }
 
   addCrypto(): void {
 

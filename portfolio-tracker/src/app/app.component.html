@@ -20,7 +20,7 @@
 
   <div style="padding-left: 0px;">
   </div>  
-  <app-add-crypto *ngIf="showAddCrypto" (cryptoAdded)="addToPortfolio($event)" (showModal)="closeModal()"></app-add-crypto>
+  <app-add-crypto *ngIf="showAddCrypto" [top100Cryptos] = "cryptosList" (cryptoAdded)="addToPortfolio($event)" (showModal)="closeModal()"></app-add-crypto>
 
   <div *ngIf="portfolio.length > 0" style="margin-bottom: 10px;">
     <p style="text-align: center; color: lightgray;">Your portfolio is worth {{portfolioValue | currency:"USD"}}.</p>

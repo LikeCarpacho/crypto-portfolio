@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, EventEmitter, Input, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-custom-dropdown',
@@ -17,6 +17,10 @@ export class CustomDropdownComponent implements OnInit {
     symbol: '',
     name: '',
   };
+
+  ngOnChanges(change: SimpleChanges){
+    this.filteredItems = [...this.items];
+  }
 
   ngOnInit() {
     if (this.items.length > 0) {
